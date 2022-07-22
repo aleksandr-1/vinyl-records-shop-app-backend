@@ -6,7 +6,7 @@
   "scripts": {
     "sls:offline": "sls offline --stage=dev --httpPort=4500",
     "sls:deploy": "sls deploy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "engines": {
     "node": ">=14.15.0"
@@ -26,6 +26,7 @@
     "serverless": "^3.0.0",
     "serverless-esbuild": "^1.23.3",
     "serverless-offline": "^9.0.0",
+    "ts-jest": "^28.0.7",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.3"

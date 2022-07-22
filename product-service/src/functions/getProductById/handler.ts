@@ -1,7 +1,7 @@
-import { headers } from "@libs/api-gateway";
-import { middyfy } from "@libs/lambda";
+import { headers } from "./../../libs/api-gateway";
+import { middyfy } from "./../../libs/lambda";
 import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
-import productsDataService from "src/services";
+import productsDataService from "./../../services";
 
 export const getProductById = async (
   event: APIGatewayEvent

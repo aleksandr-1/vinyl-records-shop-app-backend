@@ -1,7 +1,7 @@
-import { headers } from "@libs/api-gateway";
-import { middyfy } from "@libs/lambda";
+import { headers } from "./../../libs/api-gateway";
+import { middyfy } from "./../../libs/lambda";
 import { APIGatewayProxyResult } from "aws-lambda";
-import productsDataService from "src/services";
+import productsDataService from "./../../services";
 
 export const getProductsList = async (): Promise<APIGatewayProxyResult> => {
   try {

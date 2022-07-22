@@ -1,5 +1,5 @@
-import { mockedMusicRecords } from "src/model/mocked-data";
-import MusicRecord from "src/model/music-record";
+import { mockedMusicRecords } from "./../model/mocked-data";
+import MusicRecord from "./../model/music-record";
 
 export default class ProductsDataService {
   constructor() {}
