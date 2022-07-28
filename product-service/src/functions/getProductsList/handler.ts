@@ -19,6 +19,7 @@ export const getProductsList = async (): Promise<APIGatewayProxyResult> => {
       body: e,
     };
   }
+  
 };
 
 export const main = middyfy(getProductsList);
