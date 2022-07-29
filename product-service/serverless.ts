@@ -1,11 +1,16 @@
 import type { AWS } from "@serverless/typescript";
 import getProductsList from "@functions/getProductsList";
 import getProductById from "@functions/getProductById";
+import createProduct from "@functions/createProduct";
 
 const serverlessConfiguration: AWS = {
   service: "product-service",
   frameworkVersion: "3",
-  plugins: ["serverless-esbuild", "serverless-offline", "serverless-dotenv-plugin"],
+  plugins: [
+    "serverless-esbuild",
+    "serverless-offline",
+    "serverless-dotenv-plugin",
+  ],
   provider: {
     name: "aws",
     runtime: "nodejs14.x",
@@ -19,7 +24,7 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
   },
-  functions: { getProductsList, getProductById },
+  functions: { getProductsList, getProductById, createProduct },
   package: { individually: true },
   custom: {
     esbuild: {

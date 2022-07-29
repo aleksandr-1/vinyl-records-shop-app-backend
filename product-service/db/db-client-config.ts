@@ -9,6 +9,7 @@ const dbConfig: ClientConfig = {
   ssl: {
     rejectUnauthorized: false,
   },
+  connectionTimeoutMillis: 10000,
 };
 
 export default dbConfig;
