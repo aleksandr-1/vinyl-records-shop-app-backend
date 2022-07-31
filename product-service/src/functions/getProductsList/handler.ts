@@ -5,6 +5,8 @@ import productsDataService from "./../../services";
 
 export const getProductsList = async (): Promise<APIGatewayProxyResult> => {
   try {
+    console.log("GET ProductsList invoked");
+
     const musicRecords = await productsDataService.getMusicRecordsList();
 
     return {
@@ -16,7 +18,7 @@ export const getProductsList = async (): Promise<APIGatewayProxyResult> => {
     return {
       statusCode: 500,
       headers,
-      body: e,
+      body: `Error on GET Music Records List: ${e}`,
     };
   }
 };

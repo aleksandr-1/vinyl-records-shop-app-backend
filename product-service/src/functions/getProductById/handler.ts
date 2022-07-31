@@ -8,6 +8,7 @@ export const getProductById = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const productId = event.pathParameters && event.pathParameters.productId;
+    console.log(`GET ProductsList by id invoked, id = ${productId}`);
 
     if (!productId) {
       return {
