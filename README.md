@@ -1,1 +1,1 @@
-# vinyl-records-shop-app-backend
+# Vinyl-Records-Store app backend
