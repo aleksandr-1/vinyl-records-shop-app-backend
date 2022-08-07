@@ -20,12 +20,12 @@ export const importProductsFile = async (
       };
     }
 
-    const musicRecords = await importService.getImportFileName(fileName);
+    const signedUrl = await importService.getImportFileName(fileName);
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(musicRecords),
+      body: JSON.stringify(signedUrl),
     };
   } catch (e) {
     return {
