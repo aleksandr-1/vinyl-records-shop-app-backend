@@ -9,6 +9,12 @@ export default {
         path: "import",
         cors: true,
       },
+      queryStringParameters: {
+        name: {
+          required: true,
+          type: "string",
+        },
+      },
     },
   ],
 };

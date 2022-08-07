@@ -1,13 +1,26 @@
 import { headers } from "./../../libs/api-gateway";
 import { middyfy } from "./../../libs/lambda";
-import { APIGatewayProxyResult } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import importService from "./../../services";
 
-export const importProductsFile = async (): Promise<APIGatewayProxyResult> => {
+export const importProductsFile = async (
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> => {
   try {
-    console.log("GET ImportProductsFile invoked");
+    console.log("GET ImportProductsFile invoked: event: ", event);
 
-    const musicRecords = await importService.getImportFileName();
+    const fileName =
+      event && event.queryStringParameters && event.queryStringParameters.name;
+
+    if (!fileName) {
+      return {
+        statusCode: 400,
+        headers,
+        body: `Please set correct name parameter`,
+      };
+    }
+
+    const musicRecords = await importService.getImportFileName(fileName);
 
     return {
       statusCode: 200,
@@ -18,7 +31,7 @@ export const importProductsFile = async (): Promise<APIGatewayProxyResult> => {
     return {
       statusCode: 500,
       headers,
-      body: `Error on GET Music Records List: ${e}`,
+      body: `Error on GET import products file: ${e}`,
     };
   }
 };

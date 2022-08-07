@@ -5,7 +5,11 @@ import importProductsFile from "@functions/importProductsFile";
 const serverlessConfiguration: AWS = {
   service: "import-service",
   frameworkVersion: "3",
-  plugins: ["serverless-esbuild", "serverless-offline"],
+  plugins: [
+    "serverless-esbuild",
+    "serverless-offline",
+    "serverless-dotenv-plugin",
+  ],
   provider: {
     name: "aws",
     runtime: "nodejs14.x",
