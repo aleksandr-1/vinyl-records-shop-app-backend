@@ -2,8 +2,6 @@ import importFileParser from "@functions/importFileParser";
 import importProductsFile from "@functions/importProductsFile";
 import type { AWS } from "@serverless/typescript";
 
-const { BUCKET_NAME } = process.env;
-
 const serverlessConfiguration: AWS = {
   service: "import-service",
   frameworkVersion: "3",
@@ -28,12 +26,12 @@ const serverlessConfiguration: AWS = {
       {
         Effect: "Allow",
         Action: ["s3:ListBucket"],
-        Resource: [`arn:aws:s3:::${BUCKET_NAME}`],
+        Resource: [`arn:aws:s3:::vinyl-records-shop-items`],
       },
       {
         Effect: "Allow",
         Action: "s3:*",
-        Resource: `arn:aws:s3:::${BUCKET_NAME}/*`,
+        Resource: `arn:aws:s3:::vinyl-records-shop-items/*`,
       },
     ],
   },
