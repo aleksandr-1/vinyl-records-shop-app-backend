@@ -26,6 +26,16 @@ const serverlessConfiguration: AWS = {
   },
   functions: { getProductsList, getProductById, createProduct },
   package: { individually: true },
+  resources: {
+    Resources: {
+      catalogItemsQueue: {
+        Type: "AWS::SQS::Queue",
+        Properties: {
+          QueueName: "catalogItemsQueue",
+        },
+      },
+    },
+  },
   custom: {
     esbuild: {
       bundle: true,
