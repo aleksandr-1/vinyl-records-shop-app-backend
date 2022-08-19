@@ -33,6 +33,11 @@ const serverlessConfiguration: AWS = {
         Action: "s3:*",
         Resource: `arn:aws:s3:::vinyl-records-shop-items/*`,
       },
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource: 'arn:aws:sqs:eu-west-1:581001949562:catalogItemsQueue',
+      },
     ],
   },
   // import the function via paths

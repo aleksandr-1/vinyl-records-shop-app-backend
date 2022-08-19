@@ -2,6 +2,7 @@ import type { AWS } from "@serverless/typescript";
 import getProductsList from "@functions/getProductsList";
 import getProductById from "@functions/getProductById";
 import createProduct from "@functions/createProduct";
+import catalogueBatchProcess from "@functions/catalogBatchProcess";
 
 const serverlessConfiguration: AWS = {
   service: "product-service",
@@ -24,7 +25,12 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
   },
-  functions: { getProductsList, getProductById, createProduct },
+  functions: {
+    getProductsList,
+    getProductById,
+    createProduct,
+    catalogueBatchProcess,
+  },
   package: { individually: true },
   resources: {
     Resources: {

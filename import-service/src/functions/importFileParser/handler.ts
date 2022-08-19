@@ -7,22 +7,15 @@ export const importFileParser = async (
   event: S3Event
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const successResult = await importService.parseImportedFile(event);
+    await importService.parseImportedFile(event);
 
-    if (successResult) {
-      console.log("Import service: ParseImportedFile: Parsed Successfully");
-      return {
-        statusCode: 200,
-        headers,
-        body: "Parsed Successfuly",
-      };
-    } else {
-      return {
-        statusCode: 500,
-        headers,
-        body: "Error on file parsing",
-      };
-    }
+    console.log("Import service: ParseImportedFile: Parsed Successfully: ");
+
+    return {
+      statusCode: 200,
+      headers,
+      body: "Parsed Successfuly",
+    };
   } catch {
     return {
       statusCode: 500,
