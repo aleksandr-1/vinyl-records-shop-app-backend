@@ -1,11 +1,9 @@
+import importFileParser from "@functions/importFileParser";
+import importProductsFile from "@functions/importProductsFile";
 import type { AWS } from "@serverless/typescript";
-import getProductsList from "@functions/getProductsList";
-import getProductById from "@functions/getProductById";
-import createProduct from "@functions/createProduct";
-import catalogueBatchProcess from "@functions/catalogBatchProcess";
 
 const serverlessConfiguration: AWS = {
-  service: "product-service",
+  service: "import-service",
   frameworkVersion: "3",
   plugins: [
     "serverless-esbuild",
@@ -24,30 +22,33 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
-  },
-  functions: {
-    getProductsList,
-    getProductById,
-    createProduct,
-    catalogueBatchProcess,
-  },
-  package: { individually: true },
-  resources: {
-    Resources: {
-      catalogItemsQueue: {
-        Type: "AWS::SQS::Queue",
-        Properties: {
-          QueueName: "catalogItemsQueue",
-        },
+    iamRoleStatements: [
+      {
+        Effect: "Allow",
+        Action: ["s3:ListBucket"],
+        Resource: [`arn:aws:s3:::vinyl-records-shop-items`],
       },
-    },
+      {
+        Effect: "Allow",
+        Action: "s3:*",
+        Resource: `arn:aws:s3:::vinyl-records-shop-items/*`,
+      },
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource: 'arn:aws:sqs:eu-west-1:581001949562:catalogItemsQueue',
+      },
+    ],
   },
+  // import the function via paths
+  functions: { importProductsFile, importFileParser },
+  package: { individually: true },
   custom: {
     esbuild: {
       bundle: true,
       minify: false,
       sourcemap: true,
-      exclude: ["aws-sdk", "pg-native"],
+      exclude: ["aws-sdk"],
       target: "node14",
       define: { "require.resolve": undefined },
       platform: "node",
